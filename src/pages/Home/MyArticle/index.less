@@ -1,0 +1,46 @@
+.my-article{
+    margin: 0 40px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    justify-content: center;
+    .article-list{
+        width: 900px;
+        margin: 0 auto;
+        display: flex;
+        .article-image{
+            // width: 700px;
+            flex: 1;
+            img{
+                width: 430px;
+            }
+        }
+        .article-desc{
+            flex: 1;
+            // width: 600px;
+            padding: 20px;
+            .title{
+                font-size: 30px;
+            }
+            span,p{
+                color: #666;
+            }
+            span{
+                display: inline-block;
+                font-size: 14px;
+            }
+            .author{
+                padding: 10px;
+                padding-left: 0;
+                i{
+                    padding-right: 5px;
+                }
+            }
+            .time{
+                i{
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+}
