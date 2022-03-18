@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema({
  *     - author 作者
  *     - content 内容
  *     - images 文章配图
+ *     - tag 所属分类
  *     - time 文章发布时间
  */
 const articleSchema = new mongoose.Schema({
@@ -55,9 +56,3 @@ exports.User = User;
 //% 创建Article文档并向外暴露
 const Article = mongoose.model("Article", articleSchema); // articles
 exports.Article = Article;
-
-
-Article.updateOne({name: "春风不度玉门关"},{tag: "前端学习"}).then(result => console.log(result))
-Article.updateOne({name: "城南旧事"},{tag: "前端学习"}).then(result => console.log(result))
-Article.updateOne({name: "故国的春天"},{tag: "技术笔记"}).then(result => console.log(result))
-Article.updateOne({name: "故国的春天"},{tag: "技术笔记"}).then(result => console.log(result))
