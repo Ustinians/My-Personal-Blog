@@ -53,7 +53,9 @@ export default function Article(props) {
             }
           </div>
           :
-          <div className='no-comment'>暂时没有评论...</div>
+          <div className='no-comment'>
+            <p>暂时没有评论...</p>
+          </div>
         }
       </div>
     </div>

@@ -30,3 +30,12 @@
   width: 900px;
   margin: 0 auto;
 }
+.article .no-comment {
+  padding-top: 30px;
+}
+.article .no-comment p {
+  width: 150px;
+  color: #666;
+  display: block;
+  margin: 0 auto;
+}
