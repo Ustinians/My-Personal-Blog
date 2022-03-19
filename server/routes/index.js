@@ -2,7 +2,7 @@ var express = require("express");
 // var md5 = require("blueimp-md5"); // 引入md5加密
 var router = express.Router();
 // 引入mongoose中的User
-const { User, Article } = require("../db/models");
+const { User, Article, Message } = require("../db/models");
 
 // 游客注册的路由
 router.post("/register", (req, res) => {
@@ -61,9 +61,26 @@ router.post("/login",(req,res) => {
     })
 })
 
+// 根据_id值获取用户信息
+router.post("/find/user",(req,res) => {
+    User.findOne(req.body,(err,user) => {
+        if(user){
+            res.send({
+                code: 0,
+                data: user
+            })
+        }
+        else{
+            res.send({
+                code: 1,
+                mas: "未找到用户信息"
+            })
+        }
+    })
+})
 
 // 获取文章列表的路由(GET)
-router.get("/article",(req,res) => {
+router.get("/articles",(req,res) => {
     Article.find().then(doc => {
         console.log("获取文章列表成功");
         res.send({
@@ -78,5 +95,53 @@ router.get("/article",(req,res) => {
         })
     })
 })
+
+// 根据传入的信息获取文章
+router.post("/article",(req,res) => {
+    Article.find(req.body).then(doc => {
+        console.log("获取文章成功");
+        res.send({
+            code: 0,
+            data: doc
+        })
+    }).catch(err => {
+        console.log("获取文章信息失败",err);
+        res.send({
+            code: 1,
+            msg: "获取文章信息失败"
+        })
+    })
+})
+
+// 获取当前留言板信息
+router.get("/messages",(req,res) => {
+    Message.find().then(doc => {
+        console.log("获取留言列表成功");
+        res.send({
+            code: 0,
+            data: doc
+        })
+    }).catch(err => {
+        console.log("获取留言列表失败",err);
+        res.send({
+            code: 1,
+            msg: "获取留言列表失败" + err
+        })
+    })
+})
+
+// 向留言板中添加信息
+router.post("/add/message",(req,res) => {
+    const {time,content,user} = req.body;
+    new Message({ time,content,user }).save((err,message) => {
+        // 返回包含user的json格式
+        console.log("添加留言成功");
+        res.send({
+            code: 0,
+            data: message 
+        })
+    })
+})
+
 
 module.exports = router;

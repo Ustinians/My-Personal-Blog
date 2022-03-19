@@ -3,7 +3,6 @@
  */
 // 引入mongoose
 const mongoose = require("mongoose");
-const { formateDate } = require("../../src/utils/dateUtils.js")
 
 // 连接到指定的数据库
 mongoose.connect("mongodb://localhost:27017/blog", { useNewUrlParser: true })
@@ -28,6 +27,10 @@ const userSchema = new mongoose.Schema({
     website: { type: String }
 });
 
+//% 创建User文档并向外暴露
+const User = mongoose.model("User", userSchema); // users
+exports.User = User;
+
 //@ 设定Article集合规则
 /**
  *- articleSchema 文章集合规则
@@ -38,6 +41,7 @@ const userSchema = new mongoose.Schema({
  *     - images 文章配图
  *     - tag 所属分类
  *     - time 文章发布时间
+ *     - comments 文章评论
  */
 const articleSchema = new mongoose.Schema({
     title: { required: true, trim: true, type: String },
@@ -46,13 +50,30 @@ const articleSchema = new mongoose.Schema({
     content: { required: true, type: String },
     time: { type: String, required: true },
     tag: { type: String, required: true },
-    images: Array
+    images: Array,
+    comments: Array
 });
-
-//% 创建User文档并向外暴露
-const User = mongoose.model("User", userSchema); // users
-exports.User = User;
 
 //% 创建Article文档并向外暴露
 const Article = mongoose.model("Article", articleSchema); // articles
 exports.Article = Article;
+
+/**
+ * - messageSchema 留言集合规则
+ * - user 留言者
+ * - time 留言时间
+ * - content 留言内容
+ */
+const messageSchema = new mongoose.Schema({
+    time: {type: String, required: true},
+    content: {type: String, required: true},
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
+});
+
+const Message = mongoose.model("Message",messageSchema);
+exports.Message = Message;
+

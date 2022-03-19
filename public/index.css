@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
 }
-/*设置文本选中颜色，看起来更酷一些*/
+/* 设置文本选中颜色，看起来更酷一些
 ::selection { 
     background:rgba(255, 255, 255, .4); 
 }
@@ -11,4 +11,4 @@
 }
 ::-webkit-selection { 
     background:rgba(255, 255, 255, .4); 
-}
+} */

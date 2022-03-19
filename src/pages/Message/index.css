@@ -1,0 +1,11 @@
+.message {
+  margin-left: 230px;
+}
+.message .container {
+  margin: 0 auto;
+  width: 900px;
+  padding-top: 60px;
+}
+.message h1 {
+  padding-bottom: 20px;
+}

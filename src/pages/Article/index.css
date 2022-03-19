@@ -1,0 +1,32 @@
+.article {
+  margin-left: 230px;
+}
+.article .article-view {
+  width: 900px;
+  margin: 0 auto;
+  padding: 50px 0;
+  border-bottom: 1px solid #999;
+}
+.article .article-view .title {
+  padding-bottom: 20px;
+}
+.article .article-view .info {
+  color: #666;
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+.article .article-view .info span {
+  display: inline-block;
+}
+.article .article-view .info .author,
+.article .article-view .info .time {
+  padding-right: 10px;
+}
+.article .article-view .desc {
+  color: #666;
+  padding-bottom: 10px;
+}
+.article .article-comments {
+  width: 900px;
+  margin: 0 auto;
+}

@@ -1,4 +1,6 @@
 .app{
     width: 100%;
     height: 100%;
+    /* 设置可选择文本 */
+    user-select: text; 
 }

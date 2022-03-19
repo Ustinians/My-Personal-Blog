@@ -1,0 +1,19 @@
+.message-item {
+  padding: 10px 15px;
+  padding-left: 0;
+  border-bottom: 1px solid #c4c4c4;
+}
+.message-item .content {
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+.message-item .message-info {
+  color: #666;
+  font-size: 14px;
+}
+.message-item .message-info span {
+  display: inline-block;
+}
+.message-item .message-info .nickname {
+  padding-right: 10px;
+}

@@ -1,0 +1,40 @@
+.article-comment {
+  padding: 50px 0;
+  padding-bottom: 80px;
+  width: 900px;
+  margin-left: 155px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #999;
+}
+.article-comment textarea {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #999;
+  border-radius: 10px;
+  width: 880px;
+  min-width: 880px;
+  max-width: 880px;
+  height: 80px;
+  min-height: 50px;
+  max-height: 100px;
+  padding: 10px;
+  font-size: 15px;
+}
+.article-comment textarea:focus {
+  outline: none;
+  border: 1px solid #999;
+}
+.article-comment .push {
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 10px;
+  color: #666;
+  font-size: 15px;
+  float: right;
+  margin-right: -10px;
+}
+.article-comment .push:hover {
+  background-color: #f2f5f6;
+}
