@@ -1,0 +1,117 @@
+.comment {
+  margin-bottom: 30px;
+  padding: 20px;
+  padding-left: 0;
+  padding-bottom: 80px;
+  border-bottom: 1px solid #999;
+}
+.comment textarea {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #999;
+  border-radius: 10px;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
+  padding: 10px;
+  font-size: 15px;
+}
+.comment textarea:focus {
+  outline: none;
+  border: 1px solid #999;
+}
+.comment .push {
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 10px;
+  color: #666;
+  font-size: 15px;
+  float: right;
+}
+.comment .push:hover {
+  background-color: #f2f5f6;
+}
+.comment .login {
+  color: #666;
+  font-size: 15px;
+}
+.comment .login p {
+  padding: 10px 0;
+}
+.comment .login div {
+  padding: 5px 0;
+}
+.comment .login input::-webkit-input-placeholder {
+  color: #999;
+  font-size: 15px;
+}
+.comment .login input.text {
+  margin-left: 10px;
+  padding: 3px;
+  border: 1px solid #fff;
+  color: #666;
+  font-size: 15px;
+}
+.comment .login input.text:focus {
+  outline: none;
+  border-bottom: 1px solid #999;
+}
+.comment .login .ischecked input[type='checkbox'] {
+  position: relative;
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+.comment .login .ischecked input[type='checkbox']:checked::after {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  content: '✓';
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #666;
+  border-radius: 2px;
+}
+.comment .login button {
+  margin-top: 5px;
+  padding: 5px;
+  border: none;
+  color: #666;
+  background-color: #fff;
+  font-size: 15px;
+  float: right;
+}
+.comment .login button:hover {
+  background-color: #f2f5f6;
+}
+.comment .user-info {
+  padding-bottom: 20px;
+  color: #888;
+  font-size: 15px;
+}
+.comment .user-info span {
+  padding-right: 15px;
+}
+.comment .user-info span i {
+  padding-right: 5px;
+}
+.loading .loading-text {
+  padding: 80px 0;
+  color: #666;
+  width: 155px;
+  margin: 0 auto;
+}
+.message-list {
+  padding-bottom: 80px;
+}

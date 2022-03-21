@@ -32,12 +32,12 @@ export default class HomeArticle extends Component {
         articles.length > 0 ? <div>
         {
           articles.map((item,index) => {
-            return <MyArticle article={item} key={index} />
+            return <MyArticle article={item} articles={articles} number={index} key={index} />
           })
         }
         </div> 
         : 
-        <div>数据正在加载中</div>
+        <div className='loading'>数据正在加载中...</div>
       }
     </div>
     )

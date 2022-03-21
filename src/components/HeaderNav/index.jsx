@@ -23,7 +23,12 @@ export default function HeaderNav() {
       }
         <li><NavLink to="/message">留言板</NavLink></li>
         <li><NavLink to="/person">关于我</NavLink></li>
-        <li><NavLink to="/person">个人站点</NavLink></li>
+        <li className='mysite'><a href='javascrip:'>个人站点</a></li>
+      </ul>
+      <ul className='my-site'>
+        <li><a href='https://github.com/Ustinians'><i className='iconfont icon-github-fill'></i>Github</a></li>
+        <li><a href='https://www.cnblogs.com/ustinians/'><i className='iconfont icon-bokeyuan'></i>博客园</a></li>
+        <li><a href='https://juejin.cn/user/1064768878955053'><i className='iconfont icon-juejin'></i>掘金</a></li>
       </ul>
     </div>
   )

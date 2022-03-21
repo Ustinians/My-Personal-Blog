@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React,{useState,useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {reqArticle} from "../../api/index";
 import "./index.css";
-import HeaderNav from "../../components/HeaderNav";
 import ArticleComment from "../../components/ArticleComment";
 import CommentItem from "../../components/CommentItem";
 
+import {NavLink} from "react-router-dom";
+
 export default function Article(props) {
   const [article,setArticle] = useState({});
+  const {number,articles} = props.location.state;
   useEffect(() => {
     getArticle();
   },[])
@@ -24,16 +26,22 @@ export default function Article(props) {
       console.log(result.msg);
     }
   }
+  // 当提交评论之后刷新组件
+  const updateComments = () => {
+    getArticle();
+  }
   return (
     <div className='article'>
-      <HeaderNav />
       {
         article._id ? <div className='article-view'>
           <h1 className='title'>{article.title}</h1>
           <div className='info'>
-            <span className='author'>{article.author}</span>
+            <span className='author'>
+              <i className='iconfont icon-user'></i>
+              {article.author}
+            </span>
             <span className='time'>{article.time}</span>
-            <span className='tag'>{article.tag}</span>
+            <span className='tag'><i className='iconfont icon-tag'></i>{article.tag}</span>
           </div>
           <p className='desc'>{article.desc}</p>
           <div className='content'>
@@ -41,7 +49,36 @@ export default function Article(props) {
           </div>
         </div> : null
       }
-      <ArticleComment />
+      <div className='jump-others'>
+        {/* 跳转到前一篇文章或者后一篇文章 */}
+        <div className='prev'>
+          {
+            number > 0 ?
+            <NavLink to={{pathname: `/article/${articles[number-1].title}`,state:{article:articles[number-1],number:number-1,articles}}}>
+              <div className='jump-article'>
+                <span className='jump-btn'>前一篇</span>
+                <h2 className='jump-title'>{articles[number-1].title}</h2>
+              </div>
+            </NavLink>
+            :
+            null
+          }
+        </div>
+        <div className='next'>
+          {
+            number < articles.length-1 ?
+            <NavLink to={{pathname: `/article/${articles[number+1].title}`,state:{article:articles[number+1],number:number+1,articles}}}>
+              <div className='jump-article'>
+                <span className='jump-btn'>后一篇</span>
+                <h2 className='jump-title'>{articles[number+1].title}</h2>
+              </div>
+            </NavLink>
+            :
+            null
+          }
+        </div>
+      </div>
+      <ArticleComment comments={article.comments} article_id={article._id} updateComments={updateComments} />
       <div className='article-comments'>
         {
           (article.comments && article.comments.length > 0) ? 

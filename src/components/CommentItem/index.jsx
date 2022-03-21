@@ -10,7 +10,7 @@ export default function CommentItem(props) {
     getUser();
   }, [])
   const getUser = async () => {
-    console.log(comment);
+    // console.log(comment);
     const result = await reqFindUser({_id: comment.user});
     if(result.code === 0){
       setUser(result.data);

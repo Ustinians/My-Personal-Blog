@@ -7,58 +7,90 @@ const { User, Article, Message } = require("../db/models");
 // 游客注册的路由
 router.post("/register", (req, res) => {
     // 读取请求参数
-    const { email, nickname, website } = req.body;
+    const { email, nickname, website, ischecked } = req.body;
     /**
      * 判断用户是否存在,如果存在,返回错误
      * 如果该昵称还未被注册,则执行注册用户
      */
     User.findOne({ email: email }, (err, user) => {
-        // 如果user有值(该用户已存在)
+        // 如果user有值(该用户已存在,登陆)
         if (user) {
-            res.send({
-                code: 1,
-                msg: "该邮箱已被注册"
-            })
+            // 该用户存在,则登陆成功
+            if(ischecked){
+                // 生成一个cookie并交给浏览器保存
+                res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 * 7 }); // 存活时间:7天                
+            }
+            if(nickname !== user.nickname || website !== user.website){
+                // 如果第二次登陆输入的用户名,个人网站和第一次不一样,更新一下
+                User.updateOne({email},{nickname,website},(err,newUser) => {
+                    if(newUser){
+                        // 更新成功
+                        res.send({
+                            code: 0,
+                            data: newUser
+                        })
+                    }
+                    else{
+                        res.send({
+                            code: 1,
+                            msg: "更新用户信息失败" + err
+                        })
+                    }
+                })
+            }
+            else{
+                res.send({
+                    code: 0,
+                    data: user
+                })
+            }
         }
         else {
             new User({ email, nickname, website }).save((err,user) => {
-                // 返回包含user的json格式
-                console.log("用户注册成功");
-                res.send({
-                    code: 0,
-                    data: user // 返回数据中不要携带密码
-                })
-                // 用户注册成功之后直接登录,将user的_id存入cookie中
-                // maxAge: 存活时间
-                res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 }); // 存活时间:一天
+                if(user){
+                    // 返回包含user的json格式
+                    console.log("用户注册成功");
+                    res.send({
+                        code: 0,
+                        data: user
+                    })
+                    if(ischecked){
+                        // 用户注册成功之后直接登录,将user的_id存入cookie中
+                        // maxAge: 存活时间
+                        res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 * 7 }); // 存活时间:7天
+                    }
+                }
+                else{
+                    res.send({
+                        code: 1,
+                        msg: "注册用户失败," + err
+                    })
+                }
             })
         }
     })
 })
 
-// 登录个人博客后台的路由(POST)
-router.post("/login",(req,res) => {
-    const {email,website,nickname} = req.body;
-    // 根据email和password查询数据库,如果没有,返回错误提示信息
-    User.findOne({ email: email }, (err, user) => {
-        console.log(user);
-        // 如果user有值(该用户已存在)
-        if (user) {
-            // 该用户存在,则登陆成功
-            // 生成一个cookie并交给浏览器保存
-            res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 }); // 存活时间:一天
-            res.send({
-                code: 0,
-                data: user
-            })
-        }
-        else {
-            res.send({
-                code: 1,
-                msg: "找不到该用户"
-            })
-        }
-    })
+
+// 判断当前是否已经登录
+router.get("/judge/login",(req,res) => {
+    // 从请求的cookie中得到user_id
+    const user_id = req.cookies.user_id;
+    // 如果不存在,证明还未登录/注册
+    if(!user_id){
+        res.send({
+            code: 1,
+            msg: "用户还未登录/注册"
+        })
+    }
+    else{
+        res.send({
+            code: 0,
+            data: {
+                user_id
+            }
+        })
+    }
 })
 
 // 根据_id值获取用户信息
@@ -113,6 +145,26 @@ router.post("/article",(req,res) => {
     })
 })
 
+// 添加文章
+router.post("/add/article",(req,res) => {
+    new Article(req.body).save((err,article) => {
+        if(article){
+            console.log("添加文章成功");
+            res.send({
+                code: 0,
+                data: article 
+            })
+        }
+        else{
+            console.log("添加文章失败");
+            res.send({
+                code: 1,
+                msg: "添加文章失败" + err
+            })
+        }
+    })
+})
+
 // 获取当前留言板信息
 router.get("/messages",(req,res) => {
     Message.find().then(doc => {
@@ -143,5 +195,23 @@ router.post("/add/message",(req,res) => {
     })
 })
 
+// 向文章中添加评论
+router.post("/add/comment/article",(req,res) => {
+    const {comments,_id} = req.body;
+    Article.updateOne({_id},{comments},(err,article) => {
+        if(article){
+            res.send({
+                code: 0,
+                data: article
+            })
+        }
+        else{
+            res.send({
+                code: 1,
+                msg: "添加评论失败" + err
+            })
+        }
+    })
+})
 
 module.exports = router;

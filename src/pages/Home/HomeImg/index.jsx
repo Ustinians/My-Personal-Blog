@@ -1,11 +1,9 @@
 import React from 'react';
 import "./index.css";
-import HeaderNav from '../../../components/HeaderNav';
 
 export default function HomeImg() {
     return (
         <div className='home-img'>
-            <HeaderNav />
             <div className="container">
                 <div className='content'>
                     <div className="prose">

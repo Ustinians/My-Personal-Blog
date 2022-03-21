@@ -2,7 +2,7 @@
   padding: 50px 0;
   padding-bottom: 80px;
   width: 900px;
-  margin-left: 155px;
+  margin: 0 auto;
   margin-bottom: 30px;
   border-bottom: 1px solid #999;
 }
@@ -15,8 +15,8 @@
   min-width: 880px;
   max-width: 880px;
   height: 80px;
-  min-height: 50px;
-  max-height: 100px;
+  min-height: 80px;
+  max-height: 80px;
   padding: 10px;
   font-size: 15px;
 }
@@ -36,5 +36,64 @@
   margin-right: -10px;
 }
 .article-comment .push:hover {
+  background-color: #f2f5f6;
+}
+.article-comment .login {
+  color: #666;
+  font-size: 15px;
+}
+.article-comment .login p {
+  padding: 10px 0;
+}
+.article-comment .login div {
+  padding: 5px 0;
+}
+.article-comment .login input::-webkit-input-placeholder {
+  color: #999;
+  font-size: 15px;
+}
+.article-comment .login input.text {
+  margin-left: 10px;
+  padding: 3px;
+  border: 1px solid #fff;
+  color: #666;
+  font-size: 15px;
+}
+.article-comment .login input.text:focus {
+  outline: none;
+  border-bottom: 1px solid #999;
+}
+.article-comment .login .ischecked input[type='checkbox'] {
+  position: relative;
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+.article-comment .login .ischecked input[type='checkbox']:checked::after {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  content: '✓';
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #666;
+  border-radius: 2px;
+}
+.article-comment .login button {
+  margin-top: 5px;
+  padding: 5px;
+  border: none;
+  color: #666;
+  background-color: #fff;
+  font-size: 15px;
+  float: right;
+}
+.article-comment .login button:hover {
   background-color: #f2f5f6;
 }

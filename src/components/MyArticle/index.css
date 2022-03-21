@@ -47,10 +47,46 @@
 }
 .my-article .article-list .article-desc .tag {
   display: block;
-  width: 50px;
-  padding: 5px 5px;
+  padding: 5px 0;
   margin-bottom: 5px;
-  border: 1px solid #666;
   border-radius: 50px;
-  font-size: 12px;
+  font-size: 13px;
+}
+.my-article .article-list .article-desc .tag i {
+  padding-right: 5px;
+}
+.my-article .no-image {
+  width: 900px;
+  margin: 0 auto;
+}
+.my-article .no-image .article-desc .title {
+  font-size: 30px;
+}
+.my-article .no-image .article-desc span,
+.my-article .no-image .article-desc p {
+  color: #666;
+}
+.my-article .no-image .article-desc span {
+  display: inline-block;
+  font-size: 14px;
+}
+.my-article .no-image .article-desc .author {
+  padding: 10px;
+  padding-left: 0;
+}
+.my-article .no-image .article-desc .author i {
+  padding-right: 5px;
+}
+.my-article .no-image .article-desc .time i {
+  padding-right: 5px;
+}
+.my-article .no-image .article-desc .tag {
+  display: block;
+  padding: 5px 0;
+  margin-bottom: 5px;
+  border-radius: 50px;
+  font-size: 13px;
+}
+.my-article .no-image .article-desc .tag i {
+  padding-right: 5px;
 }

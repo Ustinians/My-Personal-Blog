@@ -36,3 +36,17 @@
   font-size: 18px;
   font-weight: bold;
 }
+.header-nav .my-site {
+  display: block;
+  list-style: none;
+  padding-left: 60px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.header-nav .my-site li {
+  padding: 5px 0;
+}
+.header-nav .my-site li i {
+  padding-right: 5px;
+  font-size: 20px;
+}
