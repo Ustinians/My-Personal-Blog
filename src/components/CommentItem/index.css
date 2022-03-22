@@ -17,3 +17,10 @@
 .comment-item .comment-info .nickname {
   padding-right: 10px;
 }
+.comment-item .comment-info .time {
+  padding-right: 10px;
+}
+.comment-item .comment-info .reply:hover {
+  color: #888;
+  cursor: pointer;
+}

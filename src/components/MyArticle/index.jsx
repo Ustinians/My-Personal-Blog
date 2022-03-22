@@ -32,24 +32,27 @@ export default function MyArticle(props) {
             </div>
           </NavLink>
           :
-          <div className='no-image'>
-            <div className='article-desc'>
-              <h1 className='title'>{article.title}</h1>
-              <span className='author'>
-                <i className='iconfont icon-user'></i>
-                {article.author}
-              </span>
-              <span className='time'>
-                <i className='iconfont icon-date'></i>
-                {article.time}
-              </span>
-              <span className='tag'>
-                <i className='iconfont icon-tag'></i>
-                {article.tag}
-              </span>
-              <p className='desc'>{article.desc}</p>
+          <NavLink style={{ width: 900 }} to={{ pathname: `/article/${article.title}`, state: { article, number, articles } }}>
+            <div className='no-image'>
+              <div className='article-desc'>
+                <h1 className='title'>{article.title}</h1>
+                <span className='author'>
+                  <i className='iconfont icon-user'></i>
+                  {article.author}
+                </span>
+                <span className='time'>
+                  <i className='iconfont icon-date'></i>
+                  {article.time}
+                </span>
+                <span className='tag'>
+                  <i className='iconfont icon-tag'></i>
+                  {article.tag}
+                </span>
+                <p className='desc'>{article.desc}</p>
+              </div>
             </div>
-          </div>
+          </NavLink>
+
       }
     </div>
   )

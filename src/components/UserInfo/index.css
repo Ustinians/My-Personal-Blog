@@ -1,0 +1,11 @@
+.user-info {
+  padding-bottom: 20px;
+  color: #888;
+  font-size: 15px;
+}
+.user-info span {
+  padding-right: 15px;
+}
+.user-info span i {
+  padding-right: 5px;
+}

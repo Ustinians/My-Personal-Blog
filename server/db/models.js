@@ -42,6 +42,10 @@ exports.User = User;
  *     - tag 所属分类
  *     - time 文章发布时间
  *     - comments 文章评论
+ *          + user 发送消息方or被回复方
+ *          + replyUser 回复方
+ *          + time 回复时间
+ *          + content 回复内容
  */
 const articleSchema = new mongoose.Schema({
     title: { required: true, trim: true, type: String },

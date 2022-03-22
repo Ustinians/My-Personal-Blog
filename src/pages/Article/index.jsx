@@ -3,7 +3,6 @@ import React,{useEffect,useState} from 'react';
 import {reqArticle} from "../../api/index";
 import "./index.css";
 import ArticleComment from "../../components/ArticleComment";
-import CommentItem from "../../components/CommentItem";
 
 import {NavLink} from "react-router-dom";
 
@@ -79,22 +78,6 @@ export default function Article(props) {
         </div>
       </div>
       <ArticleComment comments={article.comments} article_id={article._id} updateComments={updateComments} />
-      <div className='article-comments'>
-        {
-          (article.comments && article.comments.length > 0) ? 
-          <div className='comments-list'>
-            {
-              article.comments.map((item,index) => {
-                return <CommentItem comment={item} key={index} />
-              })
-            }
-          </div>
-          :
-          <div className='no-comment'>
-            <p>暂时没有评论...</p>
-          </div>
-        }
-      </div>
     </div>
   )
 }

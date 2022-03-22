@@ -3,34 +3,17 @@ import React, { useState, useEffect } from 'react';
 import "./index.css";
 import { reqJudgeLogin, reqRegister, reqFindUser, reqAddMessage } from "../../api/index";
 import {formateDate} from "../../utils/dateUtils";
+import LoginView from "../LoginView";
 
 export default function Comment() {
   const [comment, setComment] = useState("");
   const [isLogin, setIsLogin] = useState("");
-  const [nickname,setNickname] = useState("");
-  const [email,setEmail] = useState("");
-  const [website,setWebsite] = useState("");
-  const [ischecked,setIschecked] = useState(false);
   const [curUser,setCurUser] = useState({});
   useEffect(() => {
     isLoginOrRegister();
   }, [])
-  const pushInput = (e,type) => {
-    if(type === "comment"){
-      setComment(e.target.value);
-    }
-    else if(type === "nickname"){
-      setNickname(e.target.value);
-    }
-    else if(type === "email"){
-      setEmail(e.target.value);
-    }
-    else if(type === "website"){
-      setWebsite(e.target.value);
-    }
-    else{
-      setIschecked(!ischecked);
-    }
+  const pushComment = (e) => {
+    setComment(e.target.value);
   }
   const isLoginOrRegister = async () => {
     const result = await reqJudgeLogin();
@@ -50,8 +33,8 @@ export default function Comment() {
     }
   }
   // 登录/注册
-  const goLoginOrRegister = async () => {
-    const user = {nickname,email,website,ischecked};
+  const goLoginOrRegister = async (user) => {
+    // const user = {nickname,email,website,ischecked};
     const result = await reqRegister(user);
     if(result.code === 0){
       // setCurUser(result.data);
@@ -88,20 +71,11 @@ export default function Comment() {
         className='text'
         placeholder='请输入你的留言...'
         value={comment}
-        onChange={(event) => pushInput(event,"comment")}
+        onChange={pushComment}
       />
       {
         isLogin === "" ?
-          <div className='login'>
-            <p>请先进行登录/注册:</p>
-            <form>
-              <div className='nickname'>用户名: <input onChange={(event) => pushInput(event,"nickname")} className='text' placeholder='请输入你的用户名'></input></div>
-              <div className='email'>邮箱: <input onChange={(event) => pushInput(event,"email")} className='text' placeholder='请输入你的邮箱'></input></div>
-              <div className='website'>个人网站: <input onChange={(event) => pushInput(event,"website")} className='text' placeholder='请输入你的个人网站'></input></div>
-              <div className='ischecked'><input onChange={(event) => pushInput(event,"ischecked")} type="checkbox" /> 7天内免登录</div>
-            </form>
-            <button onClick={goLoginOrRegister}>登录/注册</button>
-          </div>
+          <LoginView goLoginOrRegister={goLoginOrRegister}></LoginView>
           :
           <button className='push' onClick={submitComment}>提交留言</button>
       }

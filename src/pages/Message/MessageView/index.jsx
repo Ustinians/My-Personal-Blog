@@ -4,14 +4,12 @@ import "./index.css";
 import { reqJudgeLogin, reqRegister, reqFindUser, reqAddMessage, reqMessages } from "../../../api/index";
 import { formateDate } from "../../../utils/dateUtils";
 import MessageItem from '../../../components/MessageItem';
+import UserInfo from "../../../components/UserInfo";
+import LoginView from '../../../components/LoginView';
 
 export default function Comment() {
   const [comment, setComment] = useState("");
   const [isLogin, setIsLogin] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
-  const [website, setWebsite] = useState("");
-  const [ischecked, setIschecked] = useState(false);
   const [curUser, setCurUser] = useState({});
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,32 +18,19 @@ export default function Comment() {
     isLoginOrRegister();
     getMessages()
   }, [])
-  const pushInput = (e, type) => {
-    if (type === "comment") {
-      setComment(e.target.value);
-      if (comment !== "") {
-        setWarn(false);
-      }
-    }
-    else if (type === "nickname") {
-      setNickname(e.target.value);
-    }
-    else if (type === "email") {
-      setEmail(e.target.value);
-    }
-    else if (type === "website") {
-      setWebsite(e.target.value);
-    }
-    else {
-      setIschecked(!ischecked);
+  const pushComment = (e) => {
+    setComment(e.target.value);
+    if (comment !== "") {
+      setWarn(false);
     }
   }
   const isLoginOrRegister = async () => {
     const result = await reqJudgeLogin();
-    // console.log(result);
+    console.log(result);
     if (result.code === 0) {
       setIsLogin(result.data.user_id)
-      const userInfo = await reqFindUser(result.data.user_id);
+      const userInfo = await reqFindUser({_id:result.data.user_id});
+      console.log(userInfo);
       if (userInfo.code === 0) {
         setCurUser(userInfo.data);
       }
@@ -58,8 +43,8 @@ export default function Comment() {
     }
   }
   // 登录/注册
-  const goLoginOrRegister = async () => {
-    const user = { nickname, email, website, ischecked };
+  const goLoginOrRegister = async (user) => {
+    // const user = { nickname, email, website, ischecked };
     const result = await reqRegister(user);
     if (result.code === 0) {
       // setCurUser(result.data);
@@ -108,32 +93,24 @@ export default function Comment() {
   return (
     <div className='container'>
       <div className='comment'>
-        <div className='user-info'>
-          <span className='user-name'><i className='iconfont icon-user'></i>{curUser.nickname}</span>
-          <span className='user-email'><i className='iconfont icon-emailfilling'></i>{curUser.email}</span>
-          <span className='user-website'><i className='iconfont icon-website'></i>{curUser.website}</span>
-        </div>
+        {
+          isLogin === "" ? 
+          null 
+          : 
+          <UserInfo curUser={curUser} />
+        }
         <textarea
           className='text'
           placeholder='请输入你的留言...'
           value={comment}
-          onChange={(event) => pushInput(event, "comment")}
+          onChange={pushComment}
         />
         {
           warn ? <p style={{ color: "red", fontSize: "14px", paddingTop: "5px" }}>留言不能为空!</p> : <p style={{ height: "24.2px" }}></p>
         }
         {
           isLogin === "" ?
-            <div className='login'>
-              <p>请先进行登录/注册:</p>
-              <form>
-                <div className='nickname'>用户名: <input onChange={(event) => pushInput(event, "nickname")} value={nickname} className='text' placeholder='请输入你的用户名'></input></div>
-                <div className='email'>邮箱: <input onChange={(event) => pushInput(event, "email")} value={email} className='text' placeholder='请输入你的邮箱'></input></div>
-                <div className='website'>个人网站: <input onChange={(event) => pushInput(event, "website")} value={website} className='text' placeholder='请输入你的个人网站'></input></div>
-                <div className='ischecked'><input onChange={(event) => pushInput(event, "ischecked")} value={ischecked} type="checkbox" /> 7天内免登录</div>
-              </form>
-              <button onClick={goLoginOrRegister}>登录/注册</button>
-            </div>
+            <LoginView goLoginOrRegister={goLoginOrRegister} />
             :
             <button className='push' onClick={submitComment}>提交留言</button>
         }

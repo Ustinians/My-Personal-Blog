@@ -18,7 +18,8 @@ router.post("/register", (req, res) => {
             // 该用户存在,则登陆成功
             if(ischecked){
                 // 生成一个cookie并交给浏览器保存
-                res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 * 7 }); // 存活时间:7天                
+                res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 * 7 }); // 存活时间:7天        
+                console.log(user._id);        
             }
             if(nickname !== user.nickname || website !== user.website){
                 // 如果第二次登陆输入的用户名,个人网站和第一次不一样,更新一下
@@ -48,17 +49,18 @@ router.post("/register", (req, res) => {
         else {
             new User({ email, nickname, website }).save((err,user) => {
                 if(user){
+                    if(ischecked){
+                        // 用户注册成功之后直接登录,将user的_id存入cookie中
+                        // maxAge: 存活时间
+                        res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 * 7 }); // 存活时间:7天
+                        console.log(user._id);
+                    }
                     // 返回包含user的json格式
                     console.log("用户注册成功");
                     res.send({
                         code: 0,
                         data: user
                     })
-                    if(ischecked){
-                        // 用户注册成功之后直接登录,将user的_id存入cookie中
-                        // maxAge: 存活时间
-                        res.cookie("user_id", user._id, { maxAge: 1000 * 60 * 60 * 24 * 7 }); // 存活时间:7天
-                    }
                 }
                 else{
                     res.send({
