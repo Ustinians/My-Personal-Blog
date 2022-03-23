@@ -8,7 +8,6 @@ import Article from "./pages/Article";
 import Person from "./pages/Person";
 import About from "./pages/About";
 import Message from "./pages/Message";
-import PersonSite from "./pages/PersonSite";
 import HeaderNav from "./components/HeaderNav";
 import Layout from "antd/lib/layout/layout";
 
@@ -27,7 +26,6 @@ export default function App() {
           <Route path="/person" component={Person}></Route>
           <Route path="/about" component={About}></Route>
           <Route path="/message" component={Message}></Route>
-          <Route path="/person-site" component={PersonSite}></Route>
           <Redirect to="/"></Redirect>
           </Switch>
           <Footer />

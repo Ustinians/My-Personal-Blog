@@ -14,9 +14,7 @@ export default function Reply(props) {
     setWarn(false);
     setComment(e.target.value)
   }
-  const updateComments = () => {
-    props.updateComments();
-  }
+  // 判断当前用户是否登录or注册
   const isLoginOrRegister = async () => {
     const result = await reqJudgeLogin();
     // console.log(result);
@@ -27,14 +25,15 @@ export default function Reply(props) {
       console.log(result.msg);
     }
   }
+  // 提交回复
   const submitComment = async () => {
     if(comment !== ""){
       const { user, comments, article_id } = props;
       comments.push({
         time: formateDate(Date.now()),
         content: comment,
-        user: user._id,
-        replyUser: isLogin
+        user: isLogin,
+        replyUser: user._id
       });
       const result = await reqCommentToArticle(comments, article_id);
       // console.log(result);
@@ -42,6 +41,7 @@ export default function Reply(props) {
         console.log("回复信息失败");
       }
       props.submitComment();
+      props.updateComments();
     }
     else{
       setWarn(true);
