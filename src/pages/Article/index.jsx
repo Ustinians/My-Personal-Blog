@@ -11,23 +11,21 @@ export default function Article(props) {
   const {number,articles} = props.location.state;
   useEffect(() => {
     getArticle();
-  },[])
+  },number)
+  // 当提交评论之后刷新组件
+  const updateComments = () => {
+    getArticle();
+  }
   const getArticle = async () => {
     const {title} = props.match.params;
-    console.log(title);
     const result = await reqArticle({title});
     // console.log(result);
     if(result.code === 0){
-      console.log("获取文章信息成功");
       setArticle(result.data[0]);
     }
     else{
       console.log(result.msg);
     }
-  }
-  // 当提交评论之后刷新组件
-  const updateComments = () => {
-    getArticle();
   }
   return (
     <div className='article'>
@@ -46,7 +44,9 @@ export default function Article(props) {
           <div className='content'>
             {article.content}
           </div>
-        </div> : null
+        </div> : <div className='article-loading'>
+          <p>文章正在加载中...</p>
+        </div>
       }
       <div className='jump-others'>
         {/* 跳转到前一篇文章或者后一篇文章 */}

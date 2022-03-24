@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom"; // 引入路由相关
+import { Switch, Route, Redirect, withRouter } from "react-router-dom"; // 引入路由相关
 import "./App.css";
 // 引入需要的路由组件
 import Home from "./pages/Home";
@@ -13,9 +13,10 @@ import Layout from "antd/lib/layout/layout";
 
 import Footer from "./components/Footer"
 
-export default function App() {
+function App(props) {
   return (
-    <div className="app">
+    // 防止路由跳转的时候页面不刷新,加上key
+    <div className="app" key={props.location.key}>
       <HeaderNav />
       <Switch>
         <Route path="/" exact component={Home}></Route>
@@ -35,3 +36,5 @@ export default function App() {
     </div>
   );
 }
+
+export default withRouter(App);

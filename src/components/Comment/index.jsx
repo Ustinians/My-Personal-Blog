@@ -4,6 +4,7 @@ import "./index.css";
 import { reqJudgeLogin, reqRegister, reqFindUser, reqAddMessage } from "../../api/index";
 import {formateDate} from "../../utils/dateUtils";
 import LoginView from "../LoginView";
+import userUtils from "../../utils/userUtils";
 
 export default function Comment() {
   const [comment, setComment] = useState("");
@@ -31,6 +32,12 @@ export default function Comment() {
     else {
       console.log(result.msg);
     }
+   /*
+    if(userUtils._id !== ""){
+      setIsLogin(userUtils._id);
+      setCurUser(userUtils.user);
+    }
+    */
   }
   // 登录/注册
   const goLoginOrRegister = async (user) => {
@@ -38,6 +45,7 @@ export default function Comment() {
     const result = await reqRegister(user);
     if(result.code === 0){
       // setCurUser(result.data);
+      userUtils._id = user._id;
       isLoginOrRegister()
     }
     else{

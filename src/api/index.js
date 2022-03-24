@@ -17,7 +17,7 @@ export const reqAddMessage = (message) => ajax("/add/message",message,"POST");
 // 根据用户id寻找用户信息
 export const reqFindUser = (user) => ajax("/find/user",user,"POST");
 
-// 判断用户当前是否登录/注册
+// 判断用户当前是否登录/注册(cookie中是否有值)
 export const reqJudgeLogin = () => ajax("/judge/login")
 
 // 向文章中添加评论

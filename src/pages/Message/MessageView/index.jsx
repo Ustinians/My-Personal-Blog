@@ -7,6 +7,8 @@ import MessageItem from '../../../components/MessageItem';
 import UserInfo from "../../../components/UserInfo";
 import LoginView from '../../../components/LoginView';
 
+// import userUtils from '../../../utils/userUtils';
+
 export default function Comment() {
   const [comment, setComment] = useState("");
   const [isLogin, setIsLogin] = useState("");
@@ -41,6 +43,12 @@ export default function Comment() {
     else {
       console.log(result.msg);
     }
+   /*
+    if(userUtils._id !== ""){
+      setIsLogin(userUtils._id);
+      setCurUser(userUtils.user);
+    }
+    */
   }
   // 登录/注册
   const goLoginOrRegister = async (user) => {
