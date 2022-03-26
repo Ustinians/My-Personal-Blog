@@ -180,6 +180,47 @@ router.post("/find/user",(req,res) => {
     })
 })
 
+// 删除指定_id的用户
+router.post("/delete/user",(req,res) => {
+    const {_id} = req.body;
+    User.findByIdAndDelete({_id},(err,user) => {
+        if(user){
+            console.log("删除用户成功");
+            res.send({
+                code: 0,
+                data: user
+            })
+        }
+        else{
+            console.log("删除用户失败");
+            res.send({
+                code: 1,
+                msg: "删除用户失败" + err
+            })
+        }
+    })
+})
+
+// 获取所有用户信息
+router.get("/find/users",(req,res) => {
+    User.find({},(err,users) => {
+        if(users){
+            console.log("获取用户列表成功!");
+            res.send({
+                code: 0,
+                data: users
+            })
+        }
+        else{
+            console.log("获取用户列表失败!");
+            res.send({
+                code: 1,
+                msg: "获取用户列表失败" + err
+            })
+        }
+    })
+})
+
 // 获取文章列表的路由(GET)
 router.get("/articles",(req,res) => {
     Article.find().then(doc => {
@@ -261,6 +302,25 @@ router.post("/add/message",(req,res) => {
             code: 0,
             data: message 
         })
+    })
+})
+
+// 删除留言
+router.post("/delete/message",(req,res) => {
+    const {_id} = req.body;
+    Message.findByIdAndDelete({_id},(err,message) => {
+        if(message){
+            res.send({
+                code: 0,
+                data: message
+            })
+        }
+        else{
+            res.send({
+                code: 1,
+                msg: "删除留言失败!"
+            })
+        }
     })
 })
 
