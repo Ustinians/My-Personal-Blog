@@ -10,7 +10,7 @@ export default function HeaderNav() {
       <NavLink to="/">
         <div className='my'>
           <img className='avatar' alt='avatar' src={avatar}></img>
-          <p className='my-nick'>躺在云朵上</p>
+          <p className='my-nick'>想躺在云上</p>
           <p className='motto'>In doing we learn.</p>
         </div>
       </NavLink>

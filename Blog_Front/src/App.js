@@ -9,7 +9,7 @@ import Person from "./pages/Person";
 import About from "./pages/About";
 import Message from "./pages/Message";
 import HeaderNav from "./components/HeaderNav";
-import Layout from "antd/lib/layout/layout";
+import Layout from "./pages/Layout";
 
 import Footer from "./components/Footer"
 

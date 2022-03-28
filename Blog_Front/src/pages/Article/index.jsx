@@ -41,9 +41,8 @@ export default function Article(props) {
             <span className='tag'><i className='iconfont icon-tag'></i>{article.tag}</span>
           </div>
           <p className='desc'>{article.desc}</p>
-          <div className='content'>
-            {article.content}
-          </div>
+          <div dangerouslySetInnerHTML={{__html:article.content}}></div>
+          {/* <div className='content'>{article.content}</div> */}
         </div> : <div className='article-loading'>
           <p>文章正在加载中...</p>
         </div>

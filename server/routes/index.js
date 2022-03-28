@@ -275,6 +275,48 @@ router.post("/add/article",(req,res) => {
     })
 })
 
+// 删除文章
+router.post("/delete/article",(req,res) => {
+    const {_id} = req.body;
+    Article.findByIdAndDelete({_id},(err,article) => {
+        if(article){
+            console.log("删除文章成功!");
+            res.send({
+                code: 0,
+                data: article
+            })
+        }
+        else{
+            console.log("删除文章失败!");
+            res.send({
+                code: 1,
+                msg: "删除文章失败" + err
+            })
+        }
+    })
+})
+
+// 更新文章
+router.post("/update/article",(req,res) => {
+    const {_id,title,desc,tag,time,content,images} = req.body;
+    Article.findByIdAndUpdate({_id},{title,desc,tag,time,content,images},(err,article) => {
+        if(article){
+            console.log("更新文章内容成功!");
+            res.send({
+                code: 0,
+                data: article
+            })
+        }
+        else{
+            console.log("更新文章内容失败!");
+            res.send({
+                code: 1,
+                msg: "更新文章内容失败" + err
+            })
+        }
+    })
+})
+
 // 获取当前留言板信息
 router.get("/messages",(req,res) => {
     Message.find().then(doc => {
@@ -343,5 +385,6 @@ router.post("/add/comment/article",(req,res) => {
     })
 })
 
+require("./file_upload")(router)
 
 module.exports = router;
