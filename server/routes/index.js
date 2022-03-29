@@ -369,7 +369,7 @@ router.post("/delete/message",(req,res) => {
 // 向文章中添加评论
 router.post("/add/comment/article",(req,res) => {
     const {comments,_id} = req.body;
-    Article.updateOne({_id},{comments},(err,article) => {
+    Article.findOneAndUpdate({_id},{comments},(err,article) => {
         if(article){
             res.send({
                 code: 0,

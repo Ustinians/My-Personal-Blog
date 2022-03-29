@@ -20,7 +20,7 @@
 }
 .article .article-view .info {
   color: #666;
-  font-size: 15px;
+  font-size: 17px;
   padding-bottom: 10px;
 }
 .article .article-view .info span {
@@ -32,7 +32,13 @@
 }
 .article .article-view .desc {
   color: #666;
+  font-size: 17px;
   padding-bottom: 10px;
+}
+.article .article-view .article-content p {
+  line-height: 1.75;
+  font-size: 18px;
+  color: #666;
 }
 .article .article-comments {
   width: 900px;

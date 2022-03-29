@@ -17,7 +17,7 @@
   min-height: 80px;
   max-height: 80px;
   padding: 10px;
-  font-size: 15px;
+  font-size: 17px;
 }
 .comment textarea:focus {
   outline: none;
@@ -30,7 +30,7 @@
   background-color: #fff;
   padding: 10px;
   color: #666;
-  font-size: 15px;
+  font-size: 17px;
   float: right;
 }
 .comment .push:hover {
@@ -38,7 +38,7 @@
 }
 .comment .login {
   color: #666;
-  font-size: 15px;
+  font-size: 17px;
 }
 .comment .login p {
   padding: 10px 0;
@@ -48,14 +48,14 @@
 }
 .comment .login input::-webkit-input-placeholder {
   color: #999;
-  font-size: 15px;
+  font-size: 17px;
 }
 .comment .login input.text {
   margin-left: 10px;
   padding: 3px;
   border: 1px solid #fff;
   color: #666;
-  font-size: 15px;
+  font-size: 17px;
 }
 .comment .login input.text:focus {
   outline: none;
@@ -89,7 +89,7 @@
   border: none;
   color: #666;
   background-color: #fff;
-  font-size: 15px;
+  font-size: 17px;
   float: right;
 }
 .comment .login button:hover {
@@ -98,7 +98,7 @@
 .comment .user-info {
   padding-bottom: 20px;
   color: #888;
-  font-size: 15px;
+  font-size: 17px;
 }
 .comment .user-info span {
   padding-right: 15px;
