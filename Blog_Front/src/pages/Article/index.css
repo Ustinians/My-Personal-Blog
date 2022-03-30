@@ -40,6 +40,10 @@
   font-size: 18px;
   color: #666;
 }
+.article .article-view .article-content img {
+  display: block;
+  margin: 0 auto;
+}
 .article .article-comments {
   width: 900px;
   margin: 0 auto;
