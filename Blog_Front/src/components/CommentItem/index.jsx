@@ -2,17 +2,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { reqFindUser } from "../../api/index";
+
 import "./index.css";
 import Reply from "../Reply";
 
 
 export default function CommentItem(props) {
-  const {comment,comments,article_id} = props;
+  const { comment, comments, article_id, isLogin } = props;
   const [user, setUser] = useState("");
   const [replyUser, setReplyUser] = useState("");
   const [isShow, setIsShow] = useState(false);
+  const [tip, setTip] = useState(false);
   useEffect(() => {
     getUser();
+    if (isLogin) setTip(false);
   }, [])
   const getUser = async () => {
     // console.log(comment);
@@ -30,13 +33,21 @@ export default function CommentItem(props) {
       }
       else {
         console.log(result2.msg);
-      }      
+      }
     }
 
   }
   // 回复评论
   const replyComment = () => {
-    setIsShow(true);
+    if (!isLogin) {
+      // 当当前用户未登录时,无法进行回复,提示用户
+      setTip(true);
+      // 提示文字3s后消失
+      setTimeout(() => setTip(false), 3000);
+    }
+    else {
+      setIsShow(true);
+    }
   }
   // 提交回复
   const submitComment = () => {
@@ -57,12 +68,13 @@ export default function CommentItem(props) {
           }
           <span className='time'>{comment.time}</span>
           <span className='reply' onClick={replyComment} >回复</span>
+          {tip ? <span className='error-tip'>当前用户未登录,请登录后再进行回复!</span> : null}
         </div>
         {
-          isShow ? <Reply 
+          isShow ? <Reply
             submitComment={submitComment}
             updateComments={props.updateComments}
-            user={user}  
+            user={user}
             comments={comments}
             article_id={article_id}
           ></Reply> : null

@@ -21,7 +21,7 @@
 .article .article-view .info {
   color: #666;
   font-size: 17px;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
 }
 .article .article-view .info span {
   display: inline-block;
@@ -32,8 +32,9 @@
 }
 .article .article-view .desc {
   color: #666;
-  font-size: 17px;
-  padding-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.75;
+  padding-bottom: 25px;
 }
 .article .article-view .article-content p {
   line-height: 1.75;

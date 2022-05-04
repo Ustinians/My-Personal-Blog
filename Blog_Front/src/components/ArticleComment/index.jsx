@@ -114,6 +114,7 @@ export default function ArticleComment(props) {
               {
                 comments.map((item, index) => {
                   return <CommentItem 
+                    isLogin={isLogin === "" ? false : true}
                     comment={item} 
                     comments={comments} 
                     article_id={article_id} 

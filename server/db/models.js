@@ -96,3 +96,19 @@ const messageSchema = new mongoose.Schema({
 const Message = mongoose.model("Message",messageSchema);
 exports.Message = Message;
 
+/**
+ *- 设置Todo任务清单集合规则
+ *- content 内容
+ *- time 时间
+ *- isComplete 是否完成
+ */
+
+ const todoShema = new mongoose.Schema({
+     content: {type: String, required: true},
+     time: {type:String, required: true},
+     isComplete: {type: String, require: true}
+ })
+
+ const Todo = mongoose.model("Todo",todoShema);
+ exports.Todo = Todo;
+

@@ -2,7 +2,7 @@ var express = require("express");
 var md5 = require("blueimp-md5"); // 引入md5加密
 var router = express.Router();
 // 引入mongoose中的User
-const { User, Article, Message, Admin } = require("../db/models");
+const { User, Article, Message, Admin, Todo } = require("../db/models");
 
 // 管理员登陆
 router.post("/login/admin",(req,res) => {
@@ -382,6 +382,36 @@ router.post("/add/comment/article",(req,res) => {
                 msg: "添加评论失败" + err
             })
         }
+    })
+})
+
+// 添加任务清单
+router.post("/add/todo",(req,res) => {
+    const {content,time,isComplete} = req.body;
+    new Todo({ content,time,isComplete }).save((err,message) => {
+        // 返回包含user的json格式
+        console.log("添加任务清单成功");
+        res.send({
+            code: 0,
+            data: message 
+        })
+    })
+})
+
+// 获取任务清单
+router.get("/todos",(req,res) => {
+    Todo.find().then(doc => {
+        console.log("获取任务清单成功");
+        res.send({
+            code: 0,
+            data: doc
+        })
+    }).catch(err => {
+        console.log("获取任务清单失败",err);
+        res.send({
+            code: 1,
+            msg: "获取任务清单失败" + err
+        })
     })
 })
 

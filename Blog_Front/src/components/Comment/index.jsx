@@ -46,7 +46,7 @@ export default function Comment() {
     if(result.code === 0){
       // setCurUser(result.data);
       userUtils._id = user._id;
-      isLoginOrRegister()
+      isLoginOrRegister();
     }
     else{
       console.log("登录/注册失败",result.msg);
